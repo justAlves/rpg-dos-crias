@@ -147,7 +147,9 @@ export function AppSidebar() {
                     <DropdownMenuItem
                       key={index}
                     >
-                      {action.label}
+                      <a href={action.href}>
+                        <span>{action.label}</span>
+                      </a>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
