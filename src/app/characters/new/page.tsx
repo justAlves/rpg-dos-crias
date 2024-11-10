@@ -1,8 +1,8 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import CharacterForm from "@/components/character-form";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-export default function Home() {
-
+export default function NewCharacter(){
   return (
     <>
       <AppSidebar/>
@@ -11,8 +11,9 @@ export default function Home() {
       />
       <main className="h-screen w-screen py-2 px-12">
         <div className="">
-          <h1 className="font-black text-2xl">Minhas Mesas</h1>
+          <h1 className="font-black text-2xl">Criador de personagens</h1>
         </div>
+        <CharacterForm/>
       </main>
     </>
   );
