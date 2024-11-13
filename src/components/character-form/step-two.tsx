@@ -20,10 +20,10 @@ export default function StepTwo({ setStep, setForm, character }: StepTwoProps) {
     if (snapshot.exists()) {
       const data = Object.entries(snapshot.val()).map(([key, value]) => ({
         id: key,
-        ...value
+        ...(value as object)
       }));
 
-      setClasses(data);
+      setClasses(data as Class[]);
       console.log(data);
     }
   }

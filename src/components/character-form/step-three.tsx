@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '../ui/button'
 import { Minus, Plus } from 'lucide-react'
 import { CharacterForm } from '@/types/character.types';

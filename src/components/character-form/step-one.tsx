@@ -20,10 +20,10 @@ export default function StepOne({ setStep, setForm, character }: StepOneProps) {
     if (snapshot.exists()) {
       const data = Object.entries(snapshot.val()).map(([key, value]) => ({
         id: key,
-        ...value
+        ...(value as object)
       }));
 
-      setRaces(data);
+      setRaces(data as Race[]);
       console.log(data);
     }
   }
