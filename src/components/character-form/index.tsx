@@ -3,8 +3,19 @@
 import { type CharacterForm } from "@/types/character.types"
 import { useState } from "react"
 import StepOne from "./step-one"
+import StepTwo from "./step-two"
+import StepThree from "./step-three"
+import StepFour from "./step-four"
+import StepFive from "./step-five"
+import Summary from "./summary"
+import { ref, push as create } from "@firebase/database"
+import { db } from "@/services/firebase"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 export default function CharacterForm() {
+  const { push } = useRouter()
+
   const [step, setStep] = useState(1)
   const [character, setCharacter] = useState<CharacterForm>({
       race: "",
@@ -47,7 +58,9 @@ export default function CharacterForm() {
         name: "",
         age: 0,
         description: "",
-      }  
+      },
+      life: 20,
+      mana: 20,
   })
 
   const getTitle = () => {
@@ -59,16 +72,31 @@ export default function CharacterForm() {
       case 3:
         return 'Pontos do personagem'
       case 4:
-        return 'Informações básicas'
+        return 'Pericias'
       case 5:
+        return 'Informações básicas'
+      default:
         return 'Resumo'
     }
+  }
+
+  const handleCreateCharacter = async () => {
+    const dbRef = ref(db, 'characters/');
+    await create(dbRef, character);
+    
+    toast.success('Personagem criado com sucesso!')
+    push('/characters')
   }
   
   return (
     <div>
       <h2>{getTitle()}</h2>
       {step === 1 && <StepOne character={character} setForm={setCharacter} setStep={setStep}/>}
+      {step === 2 && <StepTwo character={character} setForm={setCharacter} setStep={setStep}/>}
+      {step === 3 && <StepThree character={character} setForm={setCharacter} setStep={setStep}/>}
+      {step === 4 && <StepFour character={character} setForm={setCharacter} setStep={setStep}/>}
+      {step === 5 && <StepFive character={character} setForm={setCharacter} setStep={setStep}/>}
+      {step === 6 && <Summary character={character} handleFinish={handleCreateCharacter}/>}
     </div>
   )
 }

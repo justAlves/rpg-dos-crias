@@ -40,6 +40,8 @@ export interface CharacterForm {
     age: number
     description: string;
   };
+  life: number;
+  mana: number;
 }
 
 interface CharacterItem {
@@ -70,4 +72,18 @@ export interface Race {
   name: string;
   perks: Perk[];
   perksToChoose: number;
+  attributes: CharacterForm['attributes'];
+}
+
+interface SkillsDescription {
+  name: string;
+  description: string;
+}
+
+export interface Class {
+  id: string;
+  description: string;
+  name: string;
+  skillsDescription: SkillsDescription[];
+  skillsId: string[];
 }
