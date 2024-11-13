@@ -9,7 +9,7 @@ export default function Page() {
   
 
   return (
-    <div className='h-screen flex justify-center items-center'>
+    <div className='h-screen w-full flex justify-center items-center'>
       <SignUp
         appearance={{
           variables: {
