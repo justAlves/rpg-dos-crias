@@ -12,9 +12,11 @@ import { ref, push as create } from "@firebase/database"
 import { db } from "@/services/firebase"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import { useUser } from "@clerk/nextjs"
 
 export default function CharacterForm() {
   const { push } = useRouter()
+  const { user } = useUser()
 
   const [step, setStep] = useState(1)
   const [character, setCharacter] = useState<CharacterForm>({
@@ -82,7 +84,10 @@ export default function CharacterForm() {
 
   const handleCreateCharacter = async () => {
     const dbRef = ref(db, 'characters/');
-    await create(dbRef, character);
+    await create(dbRef, {
+      ...character,
+      userId: user?.id
+    });
     
     toast.success('Personagem criado com sucesso!')
     push('/characters')
